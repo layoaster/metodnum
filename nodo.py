@@ -15,3 +15,12 @@ def Nodo:
         self._x
         self._y
         self._derivada = der
+
+    def getX(self):
+        return self._x
+
+    def getY(self):
+        return self._y
+
+    def getDer(self):
+        return self._derivada

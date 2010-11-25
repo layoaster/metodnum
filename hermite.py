@@ -11,26 +11,9 @@ Description: Implementacion del metodo de Hermite para interpolacion polinomica
 
 import os
 
-def insDatos()
-    derivada = []
-    nube = []
-    op = 's'
-    i = 0
-    while op != 'n'
-        print "Xi = ",
-        x = int(raw_input())
-        print "Yi = ",
-        y = int (raw_input())
-        print "Otro Punto: ",
-        op = raw_input()
-        i += 1
-
-
 if __name__ == '__main__':
 
-
     op = '1'
-
     while op != '0':
 
         os.system('clear')
