@@ -9,17 +9,20 @@ Description: Implementacion del metodo de Hermite para interpolacion polinomica
   $Revision$
 """
 
+from nube import *
 import os
 
 if __name__ == '__main__':
 
+    nube = None
     op = '1'
     while op != '0':
 
         os.system('clear')
-        print "1.- Introduccion de datos"
-        print "2.- Evaluacion del polinomio interpolador"
-        print "3.- Expresion del Polinomio Interpolador"
+        print "1.- Introduccion de Nube de Puntos"
+        print "2.- Nube de Puntos"
+        print "3.- Evaluacion del Polinomio Interpolador"
+        print "4.- Expresion del Polinomio Interpolador"
         print "0.- Salir"
 
         print "\n\t Opcion: ",
@@ -27,12 +30,18 @@ if __name__ == '__main__':
         os.system('clear')
 
         if op == '1':
-            print "opcion ", op
+            print "Numero de Nodos: ",
+            n = int(raw_input())
+            nube = Nube(n)
+            nube.setNube()
             raw_input()
         elif op == '2':
-            print "opcion ", op
+            nube.imprimeNube()
             raw_input()
         elif op == '3':
+            print "opcion ", op
+            raw_input()
+        elif op == '4':
             print "opcion ", op
             raw_input()
         elif op != '0':

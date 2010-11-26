@@ -9,7 +9,7 @@ Description: Representacion de un Nodo de con su derivada
   $Revision$
 """
 
-def Nodo:
+class Nodo:
 
     def __init__(self, x, y, der = None):
         self._x

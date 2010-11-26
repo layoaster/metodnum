@@ -12,19 +12,45 @@ from nodo import *
 
 class Nube:
 
-    def __init__(self, numn)
+    def __init__(self, numn):
         self._numn = numn
         self._ncond = 0
         self._nube = []
 
-    def setNube():
+    def setNube(self):
         for i in range(0, self._numn):
             print "Xi = ",
-            x = int(raw_input())
+            x = float(raw_input())
             print "Yi = ",
-            y = int(raw_input())
-            print "Otro Punto: ",
+            y = float(raw_input())
+            print "¿Derivada Primera? [s/n]: ",
             op = raw_input()
-            i += 1
+            if op == 's':
+                print "Y'= ",
+                der = float(raw_input())
+            else:
+                der = None
+
+            self._nube.append(Nodo(x, y, der))
+
+    def imprimeNube(self):
+        print str("Xi").center(4),
+        for i in range(0, self._numn):
+            print str(self._nube[i].getX()).center(6),
+        print ""
+
+        print str("Yi").center(4),
+        for i in range(0, self._numn):
+            print str(self._nube[i].getY()).center(6),
+        print ""
+
+        print str("Y'i").center(4),
+        for i in range(0, self._numn):
+            if self._nube[i].getDer() != None:
+                print str(self._nube[i].getDer()).center(6),
+            else:
+                print str(" ").center(6),
+
+        print ""
 
 
