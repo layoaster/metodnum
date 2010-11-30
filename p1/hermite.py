@@ -41,6 +41,8 @@ if __name__ == '__main__':
 
 
     nube = Nube()
+    dd = None
+    global dd
     op = '1'
     while op != '0':
 
@@ -48,6 +50,7 @@ if __name__ == '__main__':
         print "1.- Introduccion de Nube de Puntos"
         print "2.- Nube de Puntos"
         print "3.- Evaluacion del Polinomio Interpolador"
+        print "4.- En que tiempo se llega a los 280 km/h"
         print "0.- Salir"
 
         print "\n\t Opcion: ",
@@ -67,7 +70,6 @@ if __name__ == '__main__':
             nl = nube.nodeList()
             #variable global para almacenar las diferencias divididas
             dd = [None] * (len(nl) - 1)
-            global dd
 
             print "Calculando diferencias divididas ..."
             dd[-1] = difDividida(nl)
@@ -90,6 +92,25 @@ if __name__ == '__main__':
                 resultado += tmp
             print "f(x) = ", resultado
 
+        elif op == '4':
+            #obtenemos las diferencias divididas del el polinomio interpolador
+            dd = [None] * (len(nube.nodeList()) - 1)
+            dd[-1] = difDividida(nube.nodeList())
+            #velocidad a comprobar
+            v = (280 * 1000) / 3600
+            #Result es la derivada del Polinomio Interpolador de la Practica
+            x = 0.0
+            while x <= 13:
+                result = dd[0]
+                result += dd[1] * 2 * x
+                result += dd[2] * ((3 * pow(x, 2)) - (6 *x))
+                result += dd[3] * ((4 * pow(x, 3)) - (24 * pow(x, 2)) + (30 * x))
+                result += dd[4] * ((5 * pow(x, 4)) - (64 * pow(x, 3)) + (237 * pow(x, 2)) - (240 * x))
+                result += dd[5] * ((6 * pow(x, 5)) - (145 * pow(x, 4)) + (1148 * pow(x, 3)) - (3441 * pow(x, 2)) + (3120 * x))
+                if result >= v:
+                    print "La velocidad de 280 km/h se alcanza a los: ", x, "segundos"
+                    break
+                x += 0.001
 
         elif op != '0':
             print "[ERROR] Opcion invalida"
