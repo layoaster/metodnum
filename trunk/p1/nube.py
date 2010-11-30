@@ -13,6 +13,8 @@ from nodo import *
 class Nube:
 
     def __init__(self, numn = 5):
+        """ Constructor de la clase que por defecto ingresa la nube de puntos del problema de la practica
+        """
         self._numn = numn
         self._ncond = 0
         self._nube = []
@@ -25,6 +27,8 @@ class Nube:
         self._nube.append(Nodo(13, 993.0, 72.0))
 
     def setNube(self):
+        """ Se ingresan los puntos pidiendo por teclado las coordenadas y derivada primera de cada uno de los puntos de la nube
+        """
         self._nube = []
         for i in range(0, self._numn):
 
@@ -43,9 +47,9 @@ class Nube:
 
             self._nube.append(Nodo(x, y, der))
 
-
-
     def imprimeNube(self):
+        """ Imprime en forma de vectores los datos de cada punto en la nube
+        """
         print str("Xi").center(4),
         for i in range(0, self._numn):
             print str(self._nube[i].getX()).ljust(6),
@@ -65,7 +69,6 @@ class Nube:
 
         print ""
 
-
     def nodeList(self):
         """ Construye la lista de nodos necesaria para calcular las diferencias divididas
         """
@@ -78,8 +81,9 @@ class Nube:
 
         return lnodes
 
-
     def getNumNodes(self):
+        """ Devuelve el numero de puntos (nodos) que conforman la nube
+        """
         return self._numn
 
 
