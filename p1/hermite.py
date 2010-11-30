@@ -73,8 +73,9 @@ if __name__ == '__main__':
 
             print "Calculando diferencias divididas ..."
             dd[-1] = difDividida(nl)
-            print "Expresion del Polinomio Interporlador:"
 
+            #Imprimimos por pantalla la expresion final del polinomio interpolador resultante
+            print "Expresion del Polinomio Interporlador:"
             print "f(x) = ", nl[0].getY(),
             for i in range(0, len(nl) - 1):
                 print "+", dd[i],
@@ -82,8 +83,11 @@ if __name__ == '__main__':
                     print "(X-" + str(nl[j].getX()) + ")",
             print ""
 
+            #Pedimos el punto a evaluar
             print "Valor de X = ",
             x = float(raw_input())
+
+            #Calculamos rel resultado de la evaluacion del polinomio
             resultado = nl[0].getY()
             for i in range(0, len(nl) - 1):
                 tmp = dd[i]
