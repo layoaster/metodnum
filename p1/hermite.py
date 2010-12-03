@@ -39,7 +39,6 @@ def difDividida(lnodes):
 
 if __name__ == '__main__':
 
-
     nube = Nube()
     dd = None
     global dd
@@ -58,8 +57,6 @@ if __name__ == '__main__':
         os.system('clear')
 
         if op == '1':
-            print "Numero de Nodos: ",
-            n = int(raw_input())
             nube.setNube()
 
         elif op == '2':
