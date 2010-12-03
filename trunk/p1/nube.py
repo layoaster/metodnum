@@ -30,6 +30,10 @@ class Nube:
         """ Se ingresan los puntos pidiendo por teclado las coordenadas y derivada primera de cada uno de los puntos de la nube
         """
         self._nube = []
+
+        print "Numero de Nodos: ",
+        self._numn = int(raw_input())
+
         for i in range(0, self._numn):
 
             print "***********"
