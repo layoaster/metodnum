@@ -40,7 +40,6 @@ class NewtonCotes:
             Modifica:
                 - _usedform = Pone a Verdadero o Falso el vector para inidicar que formula se puede usar
         """
-
         #Determinamos el numero de intervalos
         interval = self._nodes - 1
 
@@ -66,7 +65,7 @@ class NewtonCotes:
             self._usedform[self.BOOLE] = False
 
         print "Se pueden usar las siguientes formulas de cuadratura compuestas:"
-        print "\t-Trapecios"
+        print "\t-Trapezoidal"
         for i in range(1, self.BOOLE + 1):
             if self._usedform[i]:
                 if i == self.SIMPSON:
@@ -77,10 +76,12 @@ class NewtonCotes:
                     print "\t-Boole"
 
     def trapezoidal(self):
+        """ Realiza el calculo de la regla de los Trapecios Compuesta
+        """
         # calculamos el h = (b-a)/n
         h = (self._b - self._a) / (self._nodes - 1)
         # Calculamos f(a) + f(b) / 2
-        temp = (self._values[0] + self._values[-1]) / 2
+        temp = (self._values[0] + self._values[-1]) / 2.0
         # para luego sumarle el resto de los f(xi)
         for v in self._values[1:-1]:
             temp += v
@@ -89,6 +90,8 @@ class NewtonCotes:
         return self._estvalues[self.TRAPEZOIDAL]
 
     def simpson(self):
+        """ Realiza el calculo de la regla de Simpson Compuesta
+        """
         # calculamos el h = (b-a)/n
         h = (self._b - self._a) / (self._nodes - 1)
         # Sumamos nodos pares e impares por separado excepto los extremos
@@ -106,6 +109,8 @@ class NewtonCotes:
         return self._estvalues[self.SIMPSON]
 
     def simpson3_8(self):
+        """ Realiza el calculo de la regla de Simpson 3/8 Compuesta
+        """
         # calculamos el h = (b-a)/n
         h = (self._b - self._a) / (self._nodes - 1)
         # Sumamos nodos por separado excepto los extremos
@@ -119,13 +124,15 @@ class NewtonCotes:
         for i in xrange(3,len(self._values) - 1,3):
             temp3 += self._values[i]
 
-        #se multiplica los impares por 4 y los pares por 2 y se suman junto a los extremos
+        #se multiplica por los correspondientes pesos
         temp =  self._values[0] + self._values[-1] + (3 * temp1) + (3 * temp2) + (2 * temp3)
         # almacenamos el valor para ser usado al mostrar estimaciones de error
         self._estvalues[self.SIMPSON3_8] = h * (3.0 / 8.0) * temp
         return self._estvalues[self.SIMPSON3_8]
 
     def boole(self):
+        """ Realiza el calculo de la regla de Boole Compuesta
+        """
         # calculamos el h = (b-a)/n
         h = (self._b - self._a) / (self._nodes - 1)
         # Sumamos nodos por separado excepto los extremos
@@ -134,25 +141,23 @@ class NewtonCotes:
         temp3 = 0
         temp4 = 0
         for i in xrange(1,len(self._values) - 1,4):
-            #print i
             temp1 += self._values[i]
         for i in xrange(2,len(self._values) - 1,4):
-            #print i
             temp2 += self._values[i]
         for i in xrange(3,len(self._values) - 1,4):
-            #print i
             temp3 += self._values[i]
         for i in xrange(4,len(self._values) - 1,4):
-            #print i
-            temp4+= self._values[i]
+            temp4 += self._values[i]
 
-        #se multiplica los impares por 4 y los pares por 2 y se suman junto a los extremos
-        temp =  (7 * self._values[0]) + (7 * self._values[-1]) + (32 * temp1) + (12 * temp2) + (32 * temp3) + (14 * temp3)
+        #se multiplica por los correspondientes pesos
+        temp =  (7 * self._values[0]) + (7 * self._values[-1]) + (32 * temp1) + (12 * temp2) + (32 * temp3) + (14 * temp4)
         # almacenamos el valor para ser usado al mostrar estimaciones de error
         self._estvalues[self.BOOLE] = h * (2.0 / 45.0) * temp
         return self._estvalues[self.BOOLE]
 
     def integralEstimate(self):
+        """ Aplica las formulas de cuadratura indicadas para dar una estimacion del valor de la integral
+        """
         print "Trapecios:", self.trapezoidal()
 
         # Solo se usaran las reglas previamente determinadas
@@ -166,7 +171,9 @@ class NewtonCotes:
             print "Boole:", self.boole()
 
     def errorEstimate(self, rvalue):
-
+        """ En base a las estimaciones obtenidas muestra los errores reales y estimaciones del error para cada
+            formula de cuadratura
+        """
         # Pedimos las cotas superiores de las derivadas correspondientes a cada formula de cuadratura
         suplevels = [0, 0, 0, 0]
         for i in range(0, self.BOOLE + 1):
@@ -191,7 +198,7 @@ class NewtonCotes:
 
         # Calculamos estimacion del error para los Trapezoidal
         error = fabs((n * pow(h, 3) * suplevels[self.TRAPEZOIDAL]) / 12.0)
-        print "** Trapecios **"
+        print "\n** Trapecios **"
         print "Aproximacion =", self._estvalues[self.TRAPEZOIDAL]
         print "Estimacion del Error: ", error
         print "Error Real =", fabs(rvalue - self._estvalues[self.TRAPEZOIDAL])
@@ -199,7 +206,7 @@ class NewtonCotes:
         # Calculamos estimacion del error para Simpson
         if self._usedform[self.SIMPSON]:
             error = fabs(((n/2.0) * pow(h, 5) * suplevels[self.SIMPSON]) / 90.0)
-            print "** Simpson **"
+            print "\n** Simpson **"
             print "Aproximacion =", self._estvalues[self.SIMPSON]
             print "Estimacion del Error: ", error
             print "Error Real =", fabs(rvalue - self._estvalues[self.SIMPSON])
@@ -207,7 +214,7 @@ class NewtonCotes:
         # Calculamos estimacion del error para Simpson 3/8
         if self._usedform[self.SIMPSON3_8]:
             error = fabs((3*(n/3.0) * pow(h, 5) * suplevels[self.SIMPSON3_8]) / 80.0)
-            print "** Simpson 3/8 **"
+            print "\n** Simpson 3/8 **"
             print "Aproximacion =", self._estvalues[self.SIMPSON3_8]
             print "Estimacion del Error: ", error
             print "Error Real =", fabs(rvalue - self._estvalues[self.SIMPSON3_8])
@@ -215,7 +222,7 @@ class NewtonCotes:
         # Calculamos estimacion del error para Boole
         if self._usedform[self.BOOLE]:
             error = fabs((8*(n/4.0) * pow(h, 7) * suplevels[self.BOOLE]) / 945.0)
-            print "** Boole **"
+            print "\n** Boole **"
             print "Aproximacion =", self._estvalues[self.BOOLE]
             print "Estimacion del Error: ", error
             print "Error Real =", fabs(rvalue - self._estvalues[self.BOOLE])
