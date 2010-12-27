@@ -180,16 +180,16 @@ class NewtonCotes:
             if self._usedform[i]:
                 if i == self.TRAPEZOIDAL:
                     print "Cota Superior para Trapecio: ",
-                    suplevels[self.TRAPEZOIDAL] = 4.0/9.0 #float(raw_input())
+                    suplevels[self.TRAPEZOIDAL] = float(raw_input()) #4.0/9.0
                 elif i == self.SIMPSON:
                     print "Cota Superior para Simpson: ",
-                    suplevels[self.SIMPSON] = 32.0/27.0 #float(raw_input())
+                    suplevels[self.SIMPSON] = float(raw_input()) #32.0/27.0
                 elif i == self.SIMPSON3_8:
                     print "Cota Superior para Simpson 3/8: ",
-                    suplevels[self.SIMPSON3_8] = 32.0/27.0 #float(raw_input())
+                    suplevels[self.SIMPSON3_8] = float(raw_input()) #32.0/27.0
                 else:
                     print "Cota Superior para Boole: ",
-                    suplevels[self.BOOLE] = 2560.0 / 243.0 #float(raw_input())
+                    suplevels[self.BOOLE] = float(raw_input()) #2560.0 / 243.0
 
 
         # calculamos el h = (b-a)/n
