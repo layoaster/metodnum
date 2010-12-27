@@ -15,6 +15,9 @@ import math
 from quadrature import *
 
 def practFunction(x):
+    """ Funcion de la integral de la practica, el resto de lineas descomentadas sirven para automatizar las pruebas
+        para la integral de esta funcion entre [0,1]
+    """
     return math.log(2 * x + 3)
 
 
@@ -44,11 +47,11 @@ if __name__ == '__main__':
             values = []
             print "Valores del integrando en los nodos: "
             for i in range(0, nodes):
-                #print "X" + str(i) + " = ",
-                #values.append(float(raw_input()))
-                x = a + ((i * (float(b-a)/float(nodes - 1))))
-                print "X" + str(i) + " =", practFunction(x)
-                values.append(practFunction(x))
+                print "X" + str(i) + " = ",
+                values.append(float(raw_input()))
+                #x = a + ((i * (float(b-a)/float(nodes - 1))))
+                #print "X" + str(i) + " =", practFunction(x)
+                #values.append(practFunction(x))
             # Construimos , con estos datos, el objeto que manipula las formulas de cuadratura de Newton-Cotes
             nc = NewtonCotes(a, b, nodes, values)
         elif op == '2':
@@ -56,9 +59,10 @@ if __name__ == '__main__':
         elif op == '3':
             nc.integralEstimate()
         elif op == '4':
-            #print "Valor Real de la Integral:",
-            #rvalue = float(raw_input())
-            nc.errorEstimate(1.3756763480830)
+            print "Valor Real de la Integral:",
+            rvalue = float(raw_input())
+            #rvalue = 1.3756763480830
+            nc.errorEstimate(rvalue)
         elif op != '0':
             print "[ERROR] Opcion invalida"
 
