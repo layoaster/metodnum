@@ -58,7 +58,7 @@ if __name__ == '__main__':
         elif op == '4':
             #print "Valor Real de la Integral:",
             #rvalue = float(raw_input())
-            nc.errorEstimate(1.375676346)
+            nc.errorEstimate(1.3756763480830)
         elif op != '0':
             print "[ERROR] Opcion invalida"
 
