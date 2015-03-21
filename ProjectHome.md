@@ -1,0 +1,1 @@
+practicas realizadas en la asignatura de Métodos Numéricos, de la carreta ITI. Sistemas en la Universidad de La Laguna
